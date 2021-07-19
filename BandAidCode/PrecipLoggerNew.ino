@@ -1,3 +1,4 @@
+// band aid code for the Atmospheric deposition sensor box 
 
 // Here we go at logging the rain and switching the lid position.
 

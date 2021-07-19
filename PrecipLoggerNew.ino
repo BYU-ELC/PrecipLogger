@@ -103,7 +103,7 @@ void setup(void) {
 		Serial.println("card initialized.");
 	}
 
-	// create a new file
+	// create a new file, every reboot the number will increment by one
 	char filename[] = "LOGGER00.CSV";
 	for (uint8_t i = 0; i < 100; i++) {
 		filename[6] = i / 10 + '0';
@@ -124,7 +124,7 @@ void setup(void) {
 
 	/////////////////////////////////////////////
 
-	//Here we define the header for the .csv file
+	// Here we define the header for the .csv file
 	logfile.println("datetime,precip,state");
 	#if ECHO_TO_SERIAL
 		Serial.println("datetime,precip,state");
@@ -172,6 +172,7 @@ void loop() {
 		state = 0; // Default 
 	}
 
+	// log to file on SD card
 	logfile.print(now.year(), DEC);
 	logfile.print("/");
 	logfile.print(now.month(), DEC);
@@ -188,7 +189,9 @@ void loop() {
 	logfile.print(", ");
 	logfile.println(state);
 	logfile.flush();
+
 	#if ECHO_TO_SERIAL
+		// log to serial
 		Serial.print(now.year(), DEC);
 		Serial.print("/");
 		Serial.print(now.month(), DEC);
